@@ -7,6 +7,24 @@ public class FeedForwardBinaryClassifier {
   private double learningRate;
   private List<double[][]> weights;
 
+  /** @para maxEpochs
+   *    The maximum number of iterations through the 
+   *      training data to go through during training.
+   *  @para learningRate
+   *    A scalar value that determines the size of the
+   *      steps to take during gradient descent.
+   *  @para nHiddenLayers
+   *    The number of hidden layers in the neural network.
+   *  @para nHiddenNodes
+   *    The number of nodes in the hidden layers.
+   *  @preconditions maxEpochs must be greater than 0.
+   *    learningRate argument must be greater than 0.
+   *    If the value of the nHiddenLayers argument is 0,
+   *    then the value of the nHiddenNodes argument must
+   *    also be 0. If the value of nHiddenLayers is not 0, 
+   *    then the value of nHiddenNodes must be greater than
+   *    0.
+  */
   public FeedForwardBinaryClassifier(int maxEpochs, double learningRate, int nHiddenLayers, int nHiddenNodes) {
     this.learningRate = learningRate;
     this.maxEpochs = maxEpochs;
@@ -15,6 +33,15 @@ public class FeedForwardBinaryClassifier {
     this.nOutputNodes = 2;
   }
 
+  /** Fits the model to the training data.
+   *  @para X
+   *    A 2D array containing the training features.
+   *  @para y
+   *    A 2D array containing the training predictors.
+   *  @precondition The number of unique classes in X must
+   *    be equal to 2. The length of the second dimension
+   *    of y must be equal to 1.
+  */
   public void fit(double[][] X, double[][] y) {
     this.X = X;
     this.y = y;
@@ -22,6 +49,9 @@ public class FeedForwardBinaryClassifier {
     newWeights();
   }
 
+  /** Initializes the weights of the ANN to random values
+   *    between 0 and 1.
+  */
   private void newWeights() {
     this.weights = new ArrayList<double[][]>();
     int node1, node2;
