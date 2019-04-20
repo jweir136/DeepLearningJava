@@ -53,30 +53,6 @@ public class Utils {
     return resultantMatrix;
   }
 
-  /** Returns a 2D matrix which is the difference of two
-   *    matrices.
-   *  @param matrix1
-   *    The matrix that the second
-   *      matrix is subtracted from.
-   *  @param matrix2
-   *    The matrix that is subtracted from the first matrix
-   *  @return a 2D matrix equal to the difference between
-   *    The first and second matrix.
-   *  @precondition both matrix1 and matrix2 have a length
-   *    greater than 0.
-  */
-  public static double[][] subtract(double[][] matrix1, double[][] matrix2) {
-    double[][] resultantMatrix = new double[matrix1.length][matrix1[0].length];
-
-    for (int i = 0; i < matrix1.length; i++) {
-      for (int j = 0; j < matrix1[0].length; j++) {
-        resultantMatrix[i][j] = matrix1[i][j] - matrix2[i][j];
-      }
-    }
-
-    return resultantMatrix;
-  }
-
   /** Subtracts a scalar value from each element of a 2D
    *    matrix.
    *  @param matrix1
@@ -305,5 +281,60 @@ public class Utils {
     }
 
     return resultantMatrix;
+  }
+
+  /** Returns the difference of corresponding elements in
+   *   two matrices of equal size.
+   *  @param matrix1
+   *    The first matrix. This is the matrix whose elements
+   *      will be subtracted from.
+   *  @param matrix2
+   *    The second matrix. This is the matrix that will be
+   *      subtracted from the first matrix.
+   *  @return a new 2D matrix whose elements are equal to 
+   *    the corresponding elements in matrix1 minus the
+   *    corresponding elements in matrix2.
+   *  @precondition both matrix1 and matrix2 must have the 
+   *    same size, and both have lengths greater than 0. 
+   *    The length of the second dimension of both matrix1
+   *    and matrix2 must be greater than 0.
+  */
+  public static double[][] subtract(double[][] matrix1, double[][] matrix2) {
+    double[][] resultantMatrix = new double[matrix1.length][matrix1[0].length];
+
+    for (int i = 0; i < matrix1.length; i++) {
+      for (int j = 0; j < matrix1[0].length; j++) {
+        resultantMatrix[i][j] = matrix1[i][j] - matrix2[i][j];
+      }
+    }
+
+    return resultantMatrix;
+  }
+
+  /** Computes the cross entropy score of a model given its
+   *    outputed predictions to a series of predictors.
+   *    Only valid when used in binary classification.
+   *  @param predictions
+   *    A 2D matrix whose elements are equal to the output
+   *      of a sigmoid or softmax function. Is in the form
+   *      of a probability of a certain class.
+   *  @param y
+   *    A 2D matrix containing the correct labels for the 
+   *      given matrix of predictions.
+   *  @return a double value representing the accuracy of a
+   *    model given its outputs.
+   *  @precondition the length of both the predictions 
+   *    argument and the y argument must be greater than
+   *    0. The length of the second dimension of both
+   *    inputs must equal 1.
+  */
+  public static double crossEntropy(double[][] predictions, double[][] y) {
+    double error = 0.0;
+    
+    for (int i = 0; i < predictions.length; i++) {
+      error += (-y[i][0] * Math.log(predictions[i][0])) - ((1.0 - y[i][0]) * Math.log(1.0 - predictions[i][0])); 
+    }
+
+    return error / y.length;
   }
 }
