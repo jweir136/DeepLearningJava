@@ -7,15 +7,15 @@ public class FeedForwardBinaryClassifier {
   private double learningRate;
   private List<double[][]> weights;
 
-  /** @para maxEpochs
+  /** @param maxEpochs
    *    The maximum number of iterations through the 
    *      training data to go through during training.
-   *  @para learningRate
+   *  @param learningRate
    *    A scalar value that determines the size of the
    *      steps to take during gradient descent.
-   *  @para nHiddenLayers
+   *  @param nHiddenLayers
    *    The number of hidden layers in the neural network.
-   *  @para nHiddenNodes
+   *  @param nHiddenNodes
    *    The number of nodes in the hidden layers.
    *  @preconditions maxEpochs must be greater than 0.
    *    learningRate argument must be greater than 0.
@@ -34,9 +34,9 @@ public class FeedForwardBinaryClassifier {
   }
 
   /** Fits the model to the training data.
-   *  @para X
+   *  @param X
    *    A 2D array containing the training features.
-   *  @para y
+   *  @param y
    *    A 2D array containing the training predictors.
    *  @precondition The number of unique classes in X must
    *    be equal to 2. The length of the second dimension
