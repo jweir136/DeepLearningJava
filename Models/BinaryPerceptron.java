@@ -1,5 +1,7 @@
 import DeepLearning.Utils;
 
+/** Creates a very simple perceptron ANN constiting of only 1 input layer, and 1 output layer containing a single node. Can only be used for binary classification.
+*/
 public class BinaryPerceptron {
   private double[][] X;
   private int[] y;
@@ -8,12 +10,25 @@ public class BinaryPerceptron {
   private double learningRate;
   private double bias;
 
+  /** Sets the max number of epochs to use during training, the learning rate, and the bias constant.
+   *  @param epochs:
+   *    The max number of iterations throught the training data to be used when training. Training may use less than the number of epochs during training is model converges early.
+   *  @param learningRate:
+   *    The rate at which to update weights during training.
+   *  @Precondition:
+   *    1). epochs must be greater than or equal to 0. If set to zero, then no training will take place.
+   *    2). learningRate must be greater than or equal to zero. If set to zero, then no training will take place.
+  */
   public BinaryPerceptron(int epochs, double learningRate) {
     this.epochs = epochs;
     this.learningRate = learningRate;
     this.bias = 1.0;
   }
 
+  /** Fits the model with the training features and predictors. Also inits the weights randomly.
+   *  @param X:
+   *    
+  */
   public void fit(double[][] X, int[] y) {
     this.X = X;
     this.y = y;
@@ -59,8 +74,10 @@ public class BinaryPerceptron {
       for (int j = 0; j < this.weights.length; j++)
         this.weights[j] -= this.learningRate * weightDeriv(j);
       loss = error(this.X, this.y);
-      if (loss > lastLoss)
+      if (loss > lastLoss) {
+        System.out.println("Converged at " + i);
         break;
+      }
       System.out.println("Epoch: " + i + "\tLoss:" + loss);
       lastLoss = error(this.X, this.y);
     }
