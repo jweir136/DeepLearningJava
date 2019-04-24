@@ -27,13 +27,21 @@ public class Utils {
    *  @Preconditions:
    *    1). The value of nWeights must be greater than 0.
   */
-  public static double[] initWeights(int n) {
-    double[] weights = new double[n];
-    for (int i = 0; i < n; i++)
+  public static double[] initWeights(int nWeights) {
+    double[] weights = new double[nWeights];
+    for (int i = 0; i < nWeights; i++)
       weights[i] = Math.random();
     return weights;
   }
 
+  /** Computes the result of a sigmoid function with a given scalar fed into it.
+   *  @param value:
+   *    The value to be fed into the sigmoid function.
+   *  @Returns:
+   *    A new scalar representing the result of a scalar fed into the sigmoid function.
+   *  @Precondition:
+   *    1). value must be a scalar.
+  */
   public static double sigmoid(double value) {
     return 1.0 / (1.0 + Math.exp(-value));
   }
