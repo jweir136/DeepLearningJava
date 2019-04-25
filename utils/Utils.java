@@ -1,4 +1,5 @@
 package DeepLearning;
+import java.util.*;
 
 public class Utils {
   /** Return the dot product between two matrices.
@@ -44,5 +45,42 @@ public class Utils {
   */
   public static double sigmoid(double value) {
     return 1.0 / (1.0 + Math.exp(-value));
+  }
+
+  public static double[] softmax(double[] values) {
+    double[] probs = new double[values.length];
+    double sum = 0.0;
+
+    for (double val : values)
+      sum += Math.exp(val);
+  
+    for (int i = 0; i < values.length; i++)
+      probs[i] = Math.exp(values[i]) / sum;
+
+    return probs;
+  }
+
+  public static int[] unique(int[] arr) {
+    List<Integer> uniqueList = new ArrayList<Integer>();
+    int[] uniqueArray;
+
+    for (int value : arr) {
+      if (!uniqueList.contains(value))
+        uniqueList.add(value);
+    }
+
+    uniqueArray = new int[uniqueList.size()];
+    
+    for (int i = 0; i < uniqueList.size(); i++) {
+      uniqueArray[i] = uniqueList.get(i);
+    }
+
+    return uniqueArray;
+  }
+
+  public static int[][] oneHotEncode(int[] arr) {
+    int[][] encodedArr = new int[arr.length][unique(arr).length];
+
+    return encodedArr;
   }
 }
